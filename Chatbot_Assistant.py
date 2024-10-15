@@ -5,8 +5,8 @@ endpoint = "https://models.inference.ai.azure.com"
 model_name = "gpt-4o-mini"
 
 # Read the data from an environment variable
-with open("assistant_data.txt", "r") as file:
-    assistant_data = file.read()
+with open("data/system_prompt.txt", "r") as file:
+    system_prompt = file.read()
 
 with st.sidebar:
     token = st.text_input(
@@ -21,10 +21,11 @@ with st.sidebar:
 st.title("💬 Chatbot")
 st.caption("🚀 A Streamlit chatbot powered by OpenAI")
 
-intro_message = "Hi! I'm Ashhad Ahmed's assistant, here to help you with any questions related to his skills and experience. How can I assist you today?"
+with open("data/intro_message.txt", "r") as file:
+    intro_message = file.read()
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "system", "content": assistant_data}]
+    st.session_state["messages"] = [{"role": "system", "content": system_prompt}]
     st.session_state["messages"].append({"role": "assistant", "content": intro_message})
 
 # Display only user and assistant messages
