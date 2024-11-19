@@ -4,8 +4,8 @@ from openai import OpenAI
 endpoint = "https://models.inference.ai.azure.com"
 model_name = "gpt-4o-mini"
 
-with open("data/system_prompt.txt", "r") as file:
-    system_prompt = file.read()
+system_prompt = st.secrets.messages.system_prompt
+intro_message = st.secrets.messages.intro_message
 
 st.set_page_config(
     page_title="Linki - Your Personal Profile Guide",
@@ -114,8 +114,6 @@ with st.sidebar:
 st.title("💬 Linki LinkedIn Assistant")
 st.caption("🚀 A Streamlit chatbot powered by OpenAI")
 
-with open("data/intro_message.txt", "r") as file:
-    intro_message = file.read()
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "system", "content": system_prompt}]
